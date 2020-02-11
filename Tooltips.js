@@ -39,7 +39,7 @@ class TooltipHelper {
             `;
 			document.body.appendChild(elem);
 			document.body.addEventListener("mousemove", (evt) => {
-				if (evt.path[0] !== this.tooltipData.currentElem) {
+				if (this._getEventPath(evt)[0] !== this.tooltipData.currentElem) {
 					this.tooltipData.maxDepth = 0;
 					this.tooltipData.currentElem = null;
 					const tooltip = document.getElementById("tooltip-" + this.tooltipData.instanceId);
@@ -59,8 +59,8 @@ class TooltipHelper {
 		this.tooltipData.cache.set(target, {
 			text: text,
 			mousemove: (evt) => {
-				if (evt.path.length > this.tooltipData.maxDepth) {
-					this.tooltipData.maxDepth = evt.path.length;
+				if (this._getEventPath(evt).length > this.tooltipData.maxDepth) {
+					this.tooltipData.maxDepth = this._getEventPath(evt).length;
 					this.tooltipData.currentElem = target;
 					this._makeTooltipVisible(target);
 				}
@@ -135,5 +135,28 @@ class TooltipHelper {
 			bottom: rect.bottom + scrollTop,
 			left: rect.left + scrollLeft
 		};
+	}
+
+	_getEventPath(evt) {
+		let path = evt.path || (evt.composedPath && evt.composedPath());
+		if (!path) {
+			path = [];
+			let node = evt.target;
+			while (node) {
+				let parent = null;
+				if (node.parentNode) {
+					parent = node.parentNode;
+				} else if (node.host) {
+					parent = node.host;
+				} else if (node.defaultView) {
+					parent = node.defaultView;
+				} else {
+					break;
+				}
+				path.push(parent);
+				node = parent;
+			}
+		}
+		return path;
 	}
 }

@@ -14,7 +14,7 @@ If you would like to add this to a webpage you own, download [Tooltips.js](Toolt
 <script src="Tooltips.js"></script>
 ```
 
-If you are using this in a UserScript, copy/paste the code from [Tooltips.min.js](Tooltips.min.js) to the bottom of your script.
+If you are using this in a UserScript, copy/paste the code from [Tooltips.min.js](Tooltips.min.js) to the top of your script.
 
 ## Basic Usage
 
