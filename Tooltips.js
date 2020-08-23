@@ -1,7 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 class TooltipHelper {
     constructor(settings) {
-        settings = settings || {}
+        settings = settings || {};
         this.settings = {
             tooltipWidth: settings.tooltipWidth || 300,
             tooltipHTMLTag: settings.tooltipHTMLTag || "custom-tooltip"
@@ -22,10 +21,7 @@ class TooltipHelper {
     }
 
     setTooltip(target, text) {
-        let eventListenersAdded = false;
-        if (this.tooltipData.cache.get(target)) {
-            eventListenersAdded = true;
-        }
+        const eventListenersAdded = this.tooltipData.cache.has(target);
         this.tooltipData.cache.set(target, {
             text: text,
             mousemove: (evt) => {
@@ -46,6 +42,7 @@ class TooltipHelper {
         if (eventListenersAdded) {
             return;
         }
+        target.style.setProperty("pointer-events", "auto", "important");
         target.addEventListener("mouseenter", this.tooltipData.cache.get(target).mousemove);
         target.addEventListener("mousemove", this.tooltipData.cache.get(target).mousemove);
         target.addEventListener("mouseleave", this.tooltipData.cache.get(target).mouseleave);
@@ -77,7 +74,7 @@ class TooltipHelper {
             this.tooltipElement.style.left = (tooltipCenter - this.settings.tooltipWidth / 2) + "px";
         });
     }
-    
+
     getTooltip(target) {
         const data = this.tooltipData.cache.get(target);
         return data ? data.text : null;
@@ -130,10 +127,7 @@ class TooltipHelper {
     }
 
     _doesTooltipExist() {
-        if (this.tooltipElement.parentElement) {
-            return true;
-        }
-        return false;
+        return this.tooltipElement.parentElement !== null;
     }
 
     _createTooltipElement() {
