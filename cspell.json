@@ -1,0 +1,13 @@
+{
+    "version": "0.2",
+    "words": [],
+    "ignorePaths": ["package.json", "package-lock.json"],
+    "useGitignore": true,
+    "validateDirectives": true,
+    "cache": {
+        "useCache": true,
+        "cacheLocation": "./node_modules/.cache/cspell/.cspell"
+    },
+    "language": "en",
+    "dictionaries": ["html", "typescript", "css", "en-gb", "fonts", "npm"]
+}

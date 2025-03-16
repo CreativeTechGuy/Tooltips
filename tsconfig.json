@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outFile": "dist/tooltips.js",
+        "declaration": true,
+        "strict": true,
+        "target": "ES2022",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "useUnknownInCatchVariables": true,
+        "noImplicitOverride": true,
+        "alwaysStrict": false,
+        "baseUrl": "."
+    },
+    "include": ["src"]
+}
