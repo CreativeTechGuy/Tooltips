@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tooltips Playground</title>
+        <style>
+            body {
+                margin: 0;
+                min-height: 150vh;
+            }
+            button {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>Tooltips Playground</h1>
+            <button id="simple">Simple</button>
+            <button id="realtime">Realtime</button>
+            <button id="positionAdjust" style="margin-top: 20vh; margin-bottom: 10vh; margin-left: 50vw">
+                Position adjust
+            </button>
+            <button id="rightOverflow" style="float: right">Right overflow</button>
+            <button id="largeText">Large text</button>
+        </div>
+        <script src="dist/tooltips.js"></script>
+        <script>
+            const tooltips = new TooltipHelper();
+            const wideTooltip = new TooltipHelper({
+                tooltipWidth: 600,
+            });
+            tooltips.setTooltip(document.getElementById("simple"), "This is a simple one-line tooltip");
+            tooltips.setTooltip(document.getElementById("realtime"), () => new Date().toLocaleString());
+            tooltips.setTooltip(
+                document.getElementById("positionAdjust"),
+                "This\nis\nsome\nreally\nlong\ntext\nscroll the page to see me adjust"
+            );
+            wideTooltip.setTooltip(
+                document.getElementById("largeText"),
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum bibendum felis sed interdum. Phasellus euismod id eros non sodales. Suspendisse nulla quam, congue tincidunt nisi id, malesuada ornare orci. Suspendisse laoreet erat a ultricies elementum. Vestibulum tincidunt blandit justo, non varius sapien suscipit id. Donec suscipit, ligula quis lacinia sodales, enim tellus euismod lacus, bibendum gravida mi sapien non enim. Mauris sagittis auctor est, eget faucibus est convallis interdum. Sed et lacus non nisl mollis volutpat. Vestibulum et consequat sem, vel auctor ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam vitae lobortis risus, vitae vehicula velit."
+            );
+            tooltips.setTooltip(
+                document.getElementById("rightOverflow"),
+                "This text will shift left to not overflow right side of screen"
+            );
+        </script>
+    </body>
+</html>

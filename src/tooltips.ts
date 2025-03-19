@@ -100,7 +100,7 @@ class TooltipHelper {
             this.#tooltipElement.style.opacity = "1";
             const tooltipRect = this.#tooltipElement.getBoundingClientRect();
             const targetRect = this.#getAbsoluteBoundingRect(target);
-            if (targetRect.top - tooltipRect.height - 15 > 0) {
+            if (targetRect.top - tooltipRect.height - 15 > document.documentElement.scrollTop) {
                 this.#tooltipElement.style.top = `${targetRect.top - tooltipRect.height - 15}px`;
             } else {
                 this.#tooltipElement.style.top = `${targetRect.bottom + 15}px`;
